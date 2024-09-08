@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Card } from "react-bootstrap";
-import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
 
 function isValidHex(text) {
   const regex = /^#?([A-Fa-f0-9]{3}){1,2}$/;
@@ -23,8 +21,7 @@ function isColorDark(hex) {
   return luminance < 128;
 }
 
-const Picker = () => {
-  const [hexCode, setHexCode] = useState("");
+const Picker = ({hexCode, setHexCode}) => {
   const [text, setText] = useState("");
 
   const getHexCodeWithHash = () => {
