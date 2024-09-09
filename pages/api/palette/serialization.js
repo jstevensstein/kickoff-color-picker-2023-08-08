@@ -15,14 +15,14 @@ const serializePalette = (palette) => {
 const deserializePalette = (record) => {
   const colors = [];
   colors.push(record.color1)
-  if (record.color1) {
-    colors.push(record.color1);
-    if (record.color2) {
-      colors.push(record.color2);
-      if (record.color3) {
-        colors.push(record.color3);
-        if (record.color4) {
-          colors.push(record.color4);
+  if (record.color2) {
+    colors.push(record.color2);
+    if (record.color3) {
+      colors.push(record.color3);
+      if (record.color4) {
+        colors.push(record.color4);
+        if (record.color5) {
+          colors.push(record.color5);
         }
       }
     }
@@ -35,4 +35,4 @@ const deserializePalette = (record) => {
   return palette;
 }
 
-export {serializePalette, deserializePalette};
+export { serializePalette, deserializePalette };

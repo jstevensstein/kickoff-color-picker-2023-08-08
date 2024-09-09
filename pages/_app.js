@@ -10,9 +10,10 @@ function MyApp({Component, pageProps}) {
     <Navbar className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/">Welcome</Navbar.Brand>
-        <Navbar.Collapse>
+        <Navbar>
           <Nav.Link href="/palette">Add Palette</Nav.Link>
-        </Navbar.Collapse>
+          <Nav.Link href="/search">Search</Nav.Link>
+        </Navbar>
       </Container>
     </Navbar>
     <Container><Component {...pageProps} /></Container>
