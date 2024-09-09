@@ -11,7 +11,7 @@ function MyApp({Component, pageProps}) {
       <Container>
         <Navbar.Brand href="/">Welcome</Navbar.Brand>
         <Navbar.Collapse>
-          <Nav.Link href="/pallete">Add Pallete</Nav.Link>
+          <Nav.Link href="/palette">Add Palette</Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
