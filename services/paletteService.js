@@ -30,4 +30,22 @@ const putPalette = async (palette) => {
   }
 };
 
-export { getPalette, putPalette }
+const searchPalettes = async (query) => {
+  try {
+    const {status, data} = await axios.get("/api/palette/search", {
+      params: {
+        query
+      }
+    });
+    if (status === 200) {
+      return data;
+    } else {
+      throw new Error("Error searching palettes");
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
+
+export { getPalette, putPalette, searchPalettes }
