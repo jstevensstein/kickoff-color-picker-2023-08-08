@@ -7,17 +7,20 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function MyApp({Component, pageProps}) {
   return <>
-    <Navbar className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="/">Welcome</Navbar.Brand>
-        <Navbar>
-          <Nav.Link href="/palette">Add Palette</Nav.Link>
-          <Nav.Link href="/search">Search</Nav.Link>
+        <Navbar id="basic-navbar-nav">
+          <Nav>
+            <Nav.Link href="/palette">Add Palette</Nav.Link>
+            <Nav.Link href="/search">Search</Nav.Link>
+          </Nav>
         </Navbar>
       </Container>
     </Navbar>
     <Container><Component {...pageProps} /></Container>
-  </>;
+  </>
+    ;
 }
 
 export default MyApp;
