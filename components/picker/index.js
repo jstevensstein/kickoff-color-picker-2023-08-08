@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Card } from "react-bootstrap";
+import {HEX_COLOR_CODE_OPTIONAL_HASH} from "../../constants";
 
 function isValidHex(text) {
-  const regex = /^#?([A-Fa-f0-9]{3}){1,2}$/;
-  return regex.test(text);
+  return HEX_COLOR_CODE_OPTIONAL_HASH.test(text);
 }
 
+//TODO: Move into utils.
 function isColorDark(hex) {
   // Convert hex to RGB
   const rgb = parseInt(16); // Remove '#' and parse hex
