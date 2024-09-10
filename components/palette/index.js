@@ -7,8 +7,12 @@ import { putPalette } from "../../services/paletteService";
 
 const Palette = (props) => {
   const originalPalette = props.palette;
-  let originalName = originalPalette.name;
-  let originalColors = originalPalette.colors;
+  let originalName;
+  let originalColors;
+  if (originalPalette) {
+    originalName = originalPalette.name;
+    originalColors = originalPalette.colors;
+  }
 
   const [name, setName] = useState(originalName || "");
   const [colors, setColors] = useState(originalColors || [""]);
@@ -17,19 +21,27 @@ const Palette = (props) => {
 
   const [error, setError] = useState(null);
 
-  const saveEnabled = () => {
-    if (colors.some(color => !color) || !name) {
-      return false;
-    }
-    if (originalName) {
-      if (name === originalName || JSON.stringify(colors) === JSON.stringify(originalColors)) {
-        return false;
-      }
-    }
-    return true;
-  };
+  const canAdd = () => {
+    return !colors.some(color => !color) && name;
+  }
 
-  const savePalette = async () => {
+  const canUpdate = () => {
+    if (originalName) {
+      return name !== originalName || JSON.stringify(colors) !== JSON.stringify(originalColors);
+    }
+    return false;
+  }
+
+  const updatePalette = async () => {
+    try {
+      const result = await putPalette({id: originalPalette.id, name, colors});
+      await router.push("/palette/save_successful");
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  const addPalette = async () => {
     try {
       const result = await putPalette({name, colors});
       await router.push("/palette/save_successful");
@@ -75,7 +87,14 @@ const Palette = (props) => {
       ) : (
         ""
       )}
-      <Button onClick={() => savePalette()} disabled={!saveEnabled()}>
+      {
+        originalPalette ?
+          (<Button onClick={() => updatePalette()} disabled={!(canAdd() && canUpdate())}>
+            Update Palette
+          </Button>) :
+          null
+      }
+      <Button onClick={() => addPalette()} disabled={!canAdd()}>
         Save Palette
       </Button>
     </div>

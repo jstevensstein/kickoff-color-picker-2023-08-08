@@ -12,7 +12,7 @@ export default async (req, res) => {
     const serialized = serializePalette(req.body);
     if (id) {
       await knex("palettes")
-        .where({id: req.query})
+        .where({id})
         .update(serialized);
     } else {
       [id] = await knex("palettes").insert(serialized)
