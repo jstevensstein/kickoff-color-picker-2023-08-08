@@ -28,6 +28,7 @@ const Search = () => {
           <ListGroup>
             {palettes.map((palette, i) => (
               <ListGroup.Item key={i}>
+                <a href={`/palette/${palette.id}`} style={{textDecoration:"none"}}>
                 <h3>{palette.name}</h3>
                 <Stack direction="horizontal" gap="4">
                   {palette.colors.map((color, j) => {
@@ -42,6 +43,7 @@ const Search = () => {
                     )
                   })}
                 </Stack>
+                </a>
               </ListGroup.Item>
             ))}
           </ListGroup>

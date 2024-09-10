@@ -5,16 +5,28 @@ import Picker from "../picker";
 import { ListGroup, Button } from 'react-bootstrap';
 import { putPalette } from "../../services/paletteService";
 
-const Palette = () => {
-  const [name, setName] = useState("");
-  const [colors, setColors] = useState([""]);
+const Palette = (props) => {
+  const originalPalette = props.palette;
+  let originalName = originalPalette.name;
+  let originalColors = originalPalette.colors;
+
+  const [name, setName] = useState(originalName || "");
+  const [colors, setColors] = useState(originalColors || [""]);
 
   const router = useRouter();
 
   const [error, setError] = useState(null);
 
-  const saveDisabled = () => {
-    return colors.some(color => !color) || !name;
+  const saveEnabled = () => {
+    if (colors.some(color => !color) || !name) {
+      return false;
+    }
+    if (originalName) {
+      if (name === originalName || JSON.stringify(colors) === JSON.stringify(originalColors)) {
+        return false;
+      }
+    }
+    return true;
   };
 
   const savePalette = async () => {
@@ -63,7 +75,7 @@ const Palette = () => {
       ) : (
         ""
       )}
-      <Button onClick={() => savePalette()} disabled={saveDisabled()}>
+      <Button onClick={() => savePalette()} disabled={!saveEnabled()}>
         Save Palette
       </Button>
     </div>

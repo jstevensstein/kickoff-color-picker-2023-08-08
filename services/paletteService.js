@@ -1,12 +1,18 @@
 import axios from "axios";
 
 const getPalette = async (id) => {
-  const {status, data} = await axios.get(`/api/palette/${id}`);
-  if (status === 200) {
-    return data;
-  } else {
-    throw new Error("Error getting palette");
+  try {
+    const {status, data} = await axios.get(`/api/palette?id=${id}`);
+    if (status === 200) {
+      return data;
+    } else {
+      throw new Error("Error getting palette");
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.message);
   }
+
 }
 
 /**

@@ -1,5 +1,4 @@
-import Palette from "../components/palette";
-import { Col, Row } from "react-bootstrap";
+import Palette from "../../components/palette";
 
 const PaletteView = () => {
   return (

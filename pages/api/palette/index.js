@@ -1,12 +1,12 @@
 import knex from "../../../clients/knex";
-import {serializePalette, deserializePalette} from "./serialization";
+import { serializePalette, deserializePalette } from "./serialization";
 
 export default async (req, res) => {
   let {id} = req.query;
   if (req.method === "GET") {
     const {id} = req.query;
     const [palette] = await knex("palettes").where("id", id);
-    res.status(200).json(palette);
+    res.status(200).json(deserializePalette(palette));
 
   } else if (req.method === "PUT") {
     const serialized = serializePalette(req.body);
