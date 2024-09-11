@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Form from "react-bootstrap/Form";
 import Picker from "../picker";
 import { ListGroup, Button } from 'react-bootstrap';
-import { putPalette } from "../../services/paletteService";
+import { putPalette, deletePalette } from "../../services/paletteService";
 
 const Palette = (props) => {
   const originalPalette = props.palette;
@@ -36,6 +36,15 @@ const Palette = (props) => {
     try {
       const result = await putPalette({id: originalPalette.id, name, colors});
       await router.push("/palette/save_successful");
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
+  const deleteThisPalette = async () => {
+    try {
+      const result = await deletePalette(originalPalette.id);
+      await router.push("/search");
     } catch (error) {
       setError(error.message);
     }
@@ -87,16 +96,21 @@ const Palette = (props) => {
       ) : (
         ""
       )}
-      {
-        originalPalette ?
-          (<Button onClick={() => updatePalette()} disabled={!(canAdd() && canUpdate())}>
-            Update Palette
-          </Button>) :
-          null
-      }
       <Button onClick={() => addPalette()} disabled={!canAdd()}>
         Save Palette
       </Button>
+      {
+        originalPalette ?
+          (<>
+            <Button onClick={() => updatePalette()} disabled={!(canAdd() && canUpdate())}>
+              Update Palette
+            </Button>
+            <Button onClick={() => deleteThisPalette()} variant="danger">
+              Delete Palette
+            </Button>
+          </>) :
+          null
+      }
     </div>
   );
 };

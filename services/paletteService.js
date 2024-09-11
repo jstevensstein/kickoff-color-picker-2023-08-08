@@ -54,4 +54,20 @@ const searchPalettes = async (query) => {
   }
 };
 
-export { getPalette, putPalette, searchPalettes }
+const deletePalette = async (id) => {
+  try {
+    const {status, data} = await axios.delete("/api/palette/", {
+      params: {id}
+    });
+    if (status === 200) {
+      return data;
+    } else {
+      throw new Error("Error deleting palette");
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+}
+
+export { getPalette, putPalette, searchPalettes, deletePalette }

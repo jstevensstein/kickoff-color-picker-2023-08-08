@@ -23,7 +23,12 @@ export default async (req, res) => {
       .limit(1);
 
     res.status(200).json(deserializePalette(record));
-  } else {
+  } else if (req.method === "DELETE") {
+    const result = await knex("palettes").where({id}).delete();
+    console.log(result);
+    res.status(200).json({});
+  }
+  else {
 
     res.status(404).json({error: `${req.method} endpoint does not exist`});
   }
