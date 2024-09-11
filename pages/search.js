@@ -2,7 +2,7 @@ import Search from "../components/search";
 
 const SearchView = () => {
   return (
-      <Search/>
+    <Search />
   );
 };
 
