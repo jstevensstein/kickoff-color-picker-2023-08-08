@@ -9,7 +9,7 @@ function isValidHex(text) {
 }
 
 const Picker = ({hexCode, setHexCode}) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(hexCode);
 
   const colorCodeWithHash = () => {
     return addLeadingHash(hexCode);
