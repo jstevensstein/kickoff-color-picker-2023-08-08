@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import Form from "react-bootstrap/Form";
+import Alert from 'react-bootstrap/Alert';
 import Picker from "../picker";
 import { ListGroup, Button } from 'react-bootstrap';
 import { putPalette, deletePalette } from "../../services/paletteService";
@@ -97,7 +98,7 @@ const Palette = (props) => {
         ""
       )}
       <Button onClick={() => addPalette()} disabled={!canAdd()}>
-        Save Palette
+        Save {originalName ? "As New" : null} Palette
       </Button>
       {
         originalPalette ?
@@ -111,6 +112,11 @@ const Palette = (props) => {
           </>) :
           null
       }
+      {
+        error ?
+          (<Alert variant="danger">
+            {error}
+          </Alert>) : null}
     </div>
   );
 };
